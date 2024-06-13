@@ -1,0 +1,8 @@
+﻿<Project>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <OutputPath>$(AppData)/OuterWildsModManager/OWML/Mods/MegaPiggy.RetroHealthDisplay</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Unix'">
+    <OutputPath>$(HOME)/.local/share/ow-mod-man/OWML/Mods/MegaPiggy.RetroHealthDisplay</OutputPath>
+  </PropertyGroup>
+</Project>
