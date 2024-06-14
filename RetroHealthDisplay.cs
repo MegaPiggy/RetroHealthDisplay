@@ -21,6 +21,8 @@ namespace RetroHealthDisplay
 		public static GameObject Vitals => Canvas.transform.Find("VitalsText").gameObject;
 		public static Text VitalsText => Vitals.GetComponent<Text>();
 
+		public static int PercentageSize = 5;
+
 		public void Awake()
 		{
 			Instance = this;
@@ -40,7 +42,7 @@ namespace RetroHealthDisplay
 		{
 			float healthFraction = __instance._playerResources.GetHealthFraction();
 			float health = __instance._playerResources.GetHealth();
-			HealthText.text = Mathf.Max(0f, health).ToString("F1") + "<size=5>%</size>";
+			HealthText.text = Mathf.Max(0f, health).ToString("F1") + $"<size={PercentageSize}>%</size>";
 			float t = Mathf.Clamp01((healthFraction - 0.2f) * 1.25f);
 			var color = Color.Lerp(new Color(1f, 0.2f, 0.1f, 1f), new Color(1f, 1f, 1f, 1f), t);
 			HealthText.color = color;
