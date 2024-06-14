@@ -47,11 +47,22 @@ namespace RetroHealthDisplay
 			Vitals.SetActive(true);
 		}
 
+		[HarmonyPostfix, HarmonyPatch(typeof(HUDCanvas), nameof(HUDCanvas.OnPlayerDeath))]
+		public static void HUDCanvas_OnPlayerDeath(HUDCanvas __instance)
+		{
+			UpdateText(__instance._playerResources, true);
+		}
+
 		[HarmonyPostfix, HarmonyPatch(typeof(HUDCanvas), nameof(HUDCanvas.UpdateHealth))]
 		public static void HUDCanvas_UpdateHealth(HUDCanvas __instance)
 		{
-			float healthFraction = __instance._playerResources.GetHealthFraction();
-			float health = __instance._playerResources.GetHealth();
+			UpdateText(__instance._playerResources);
+		}
+
+		public static void UpdateText(PlayerResources playerResources, bool died = false)
+		{
+			float healthFraction = died ? 0 : playerResources.GetHealthFraction();
+			float health = died ? 0 : playerResources.GetHealth();
 			HealthText.text = Mathf.Max(0f, health).ToString("F1") + $"<size={PercentageSize}>%</size>";
 			float t = Mathf.Clamp01((healthFraction - 0.2f) * 1.25f);
 			var color = Color.Lerp(new Color(1f, 0.2f, 0.1f, 1f), new Color(1f, 1f, 1f, 1f), t);
