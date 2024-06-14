@@ -4,7 +4,7 @@
   "author": "MegaPiggy",
   "name": "Retro Health Display",
   "uniqueName": "MegaPiggy.RetroHealthDisplay",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "owmlVersion": "2.13.0",
   "dependencies": []
 }
