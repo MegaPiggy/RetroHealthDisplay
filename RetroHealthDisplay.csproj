@@ -25,4 +25,12 @@
   <ItemGroup>
     <Content Include="RetroHealthDisplay.csproj.user" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="vcr_osd_mono.font">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="vcr_osd_mono.font.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

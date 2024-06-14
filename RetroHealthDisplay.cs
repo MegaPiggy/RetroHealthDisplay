@@ -21,7 +21,10 @@ namespace RetroHealthDisplay
 		public static GameObject Vitals => Canvas.transform.Find("VitalsText").gameObject;
 		public static Text VitalsText => Vitals.GetComponent<Text>();
 
-		public static int PercentageSize = 5;
+		public static int PercentageSize => HealthText.fontSize / 2;
+
+		public static AssetBundle FontBundle;
+		public static Font VCR_OSD_MONO;
 
 		public void Awake()
 		{
@@ -29,11 +32,18 @@ namespace RetroHealthDisplay
 			new Harmony("MegaPiggy.RetroHealthDisplay").PatchAll(Assembly.GetExecutingAssembly());
 		}
 
+		public void Start()
+		{
+			FontBundle = ModHelper.Assets.LoadBundle("vcr_osd_mono.font");
+			VCR_OSD_MONO = FontBundle.LoadAsset<Font>("Assets/Resources/fonts/english - latin/VCR_OSD_MONO.ttf");
+		}
+
 		[HarmonyPostfix, HarmonyPatch(typeof(HUDCanvas), nameof(HUDCanvas.Start))]
 		public static void HUDCanvas_Start(HUDCanvas __instance)
 		{
 			HealthSilhouette.SetActive(false);
 			Health.SetActive(true);
+			HealthText.font = VCR_OSD_MONO;
 			Vitals.SetActive(true);
 		}
 
